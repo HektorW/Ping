@@ -1,0 +1,12 @@
+{
+  "browser": true,
+  "undef": true,
+  "unused": true,
+  "indent": 2,
+  "globals": {
+    "require": true,
+    "$": true,
+    "jQuery": true,
+    "Modernizr": true
+  }
+}
