@@ -1,4 +1,8 @@
 
+window.onerror = function(er, f, l) {
+  window.alert(er + '\n' + f +', ' + l);
+};
+
 require.config({
   shim: {
     socketio: {

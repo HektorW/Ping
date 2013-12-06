@@ -6,6 +6,19 @@ define([
   'text!templates/stats.html'
 ], function(io, $, _, pingTemplate, statsTemplate) {
 
+  var now = (function() {
+    var p = window.performance || {};
+
+    p.now = p.now ||
+            p.webkitNow || 
+            p.mozNow ||
+            p.msNow ||
+            Date.now;
+
+    return function() { return p.now(); };
+
+  }());
+
   var App = {
     status: 'disconnected',
     users: 0,
@@ -58,14 +71,14 @@ define([
     },
 
     ping: function() {
-      this.ping_time = performance.now();
+      this.ping_time = now();
       this.socket.emit('ping_request', {
         id: this.ping_time
       });
     },
     pingResponse: function(data) {
       if(data.id === this.ping_time) {
-        this.ping_value = performance.now() - this.ping_time;
+        this.ping_value = now() - this.ping_time;
         this.renderPing();  
       }
 
